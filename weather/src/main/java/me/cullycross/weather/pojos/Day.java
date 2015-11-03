@@ -17,7 +17,7 @@ public class Day {
   @SerializedName("icon") @Expose private String mIcon;
 
   public long getDate() {
-    return mDate;
+    return mDate * 1000l; // to millis
   }
 
   public float getMin() {

@@ -1,5 +1,6 @@
 package me.cullycross.weather.activities;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import butterknife.Bind;
@@ -21,6 +22,12 @@ public class WeatherActivity extends NavigationActivity implements OnFragmentInt
 
     setSupportActionBar(mToolbar);
     mToolbar.setTitle(R.string.app_name);
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+      mToolbar.setTitleTextColor(getColor(android.R.color.white));
+    } else {
+      //noinspection deprecation
+      mToolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+    }
 
     push(R.id.fragment_layout, InputFragment.newInstance());
   }

@@ -4,41 +4,49 @@
     android:layout_height="56dp"
     >
 
-    <TextView
-        android:id="@+id/weekday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:maxWidth="160dp"
-        android:maxLines="1"
-        android:text="Friday"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:layout_marginLeft="60dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="12dp"/>
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:maxWidth="160dp"
-        android:maxLines="1"
-        android:text="13 november 2015"
-        android:layout_below="@+id/weekday"
-        android:layout_alignLeft="@id/weekday"
-        android:layout_alignStart="@id/weekday"
-        />
+  <FrameLayout
+      android:id="@+id/weather_view"
+      android:layout_height="match_parent"
+      android:layout_width="56dp"
+      android:layout_marginLeft="4dp"
+      android:layout_marginStart="4dp"
+      />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/temperature"
-        android:maxWidth="160dp"
-        android:maxLines="1"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:id="@+id/temperature"/>
+  <TextView
+      android:id="@+id/weekday"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:maxWidth="160dp"
+      android:maxLines="1"
+      android:text="Friday"
+      android:textColor="@android:color/black"
+      android:textStyle="bold"
+      android:layout_marginLeft="60dp"
+      android:layout_marginStart="60dp"
+      android:layout_marginTop="10dp"/>
+  <TextView
+      android:id="@+id/date"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:maxWidth="160dp"
+      android:maxLines="1"
+      android:text="13 november 2015"
+      android:layout_below="@+id/weekday"
+      android:layout_alignLeft="@id/weekday"
+      android:layout_alignStart="@id/weekday"
+      />
+
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/temperature"
+      android:maxWidth="160dp"
+      android:maxLines="1"
+      android:layout_centerVertical="true"
+      android:layout_alignParentRight="true"
+      android:layout_alignParentEnd="true"
+      android:layout_marginStart="8dp"
+      android:layout_marginEnd="8dp"
+      android:id="@+id/temperature"/>
 
 </RelativeLayout>

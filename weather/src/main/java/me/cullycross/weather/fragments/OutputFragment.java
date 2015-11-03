@@ -10,13 +10,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -25,6 +25,7 @@ import me.cullycross.kpimapstest.DynamicFragment;
 import me.cullycross.weather.R;
 import me.cullycross.weather.network.RestClient;
 import me.cullycross.weather.pojos.Day;
+import me.cullycross.weather.utils.WeatherViewUtils;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -157,7 +158,6 @@ public class OutputFragment extends DynamicFragment {
 
     @Override public void onBindViewHolder(DayItem holder, final int position) {
       final Day day = mData.get(position);
-      Log.wtf(TAG, day.getDate() + "");
       final Date date = new Date(day.getDate());
 
       holder.mWeekday.setText(WEEKDAY_FORMAT.format(date));
@@ -165,6 +165,13 @@ public class OutputFragment extends DynamicFragment {
       holder.mTemperature.setText(
           String.format(getContext().getString(R.string.temperature), ftoC(day.getMin()),
               ftoC(day.getMax())));
+
+      final FrameLayout.LayoutParams params =
+          new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
+              FrameLayout.LayoutParams.MATCH_PARENT);
+
+      holder.mWeatherView.addView(WeatherViewUtils.getWeatherView(getContext(), day.getIcon()),
+          params);
     }
 
     @Override public int getItemCount() {
@@ -176,6 +183,7 @@ public class OutputFragment extends DynamicFragment {
       @Bind(R.id.weekday) TextView mWeekday;
       @Bind(R.id.date) TextView mDate;
       @Bind(R.id.temperature) TextView mTemperature;
+      @Bind(R.id.weather_view) FrameLayout mWeatherView;
 
       public DayItem(View itemView) {
         super(itemView);
