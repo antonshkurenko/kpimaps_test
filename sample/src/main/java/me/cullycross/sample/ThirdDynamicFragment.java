@@ -26,7 +26,7 @@ public class ThirdDynamicFragment extends DynamicFragment {
   public static ThirdDynamicFragment newInstance(String str) {
     final ThirdDynamicFragment frag = new ThirdDynamicFragment();
     final Bundle args = new Bundle();
-    args.putString(DynamicFragment.ARGS_STRING, str);
+    args.putString(MainActivity.ARGS_STRING, str);
     frag.setArguments(args);
     return frag;
   }
@@ -44,7 +44,7 @@ public class ThirdDynamicFragment extends DynamicFragment {
   @Nullable @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     final View view = inflater.inflate(R.layout.fragment_third_layout, null);
-    mString = getArguments().getString(DynamicFragment.ARGS_STRING, "Use factory method!");
+    mString = getArguments().getString(MainActivity.ARGS_STRING, "Use factory method!");
     ((TextView) view).setText(mString);
     return view;
   }

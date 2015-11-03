@@ -1,9 +1,10 @@
 package me.cullycross.kpimapstest;
 
+import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,15 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
   protected List<DynamicFragment> mFragments = new ArrayList<>();
 
-  protected abstract void showFragment(Fragment fragment);
+  @IdRes private int mLastAddedId;
+
+  protected void showFragment(@IdRes int id, Fragment fragment) {
+    getSupportFragmentManager().beginTransaction()
+        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+        .replace(id, fragment)
+        .commit();
+    getSupportFragmentManager().executePendingTransactions();
+  }
 
   @Override public void onBackPressed() {
     if (!pop()) {
@@ -21,10 +30,11 @@ public abstract class NavigationActivity extends AppCompatActivity {
     }
   }
 
-  protected void push(DynamicFragment fragment) {
+  protected void push(@IdRes int id, DynamicFragment fragment) {
     mFragments.add(fragment);
-    showFragment(fragment);
+    showFragment(id, fragment);
     fragment.onPush();
+    mLastAddedId = id;
   }
 
   protected boolean pop() {
@@ -34,7 +44,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
       fragment.onPop();
       mFragments.remove(fragment);
       try {
-        showFragment(mFragments.get(mFragments.size() - 1));
+        showFragment(mLastAddedId, mFragments.get(mFragments.size() - 1));
       } catch (IndexOutOfBoundsException e) {
         Log.w(TAG, "There's nothing to show");
         clear();
@@ -47,6 +57,6 @@ public abstract class NavigationActivity extends AppCompatActivity {
   }
 
   protected void clear() {
-    showFragment(new Fragment());
+    showFragment(mLastAddedId, new Fragment());
   }
 }

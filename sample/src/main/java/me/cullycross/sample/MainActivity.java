@@ -24,6 +24,8 @@ public class MainActivity extends NavigationActivity {
 
   private static final String TAG = MainActivity.class.getSimpleName();
 
+  public static final String ARGS_STRING = "the_grass_was_greener"; // the light was brighter
+
   protected static final String FIRST = "First";
   protected static final String SECOND = "Second";
   protected static final String THIRD = "Third";
@@ -62,7 +64,7 @@ public class MainActivity extends NavigationActivity {
         Log.w(TAG, "Smth wrong");
         return;
     }
-    push(fragment);
+    push(R.id.fragment_layout, fragment);
     mCount.setText(mFragments.size() + "");
   }
 
@@ -70,14 +72,6 @@ public class MainActivity extends NavigationActivity {
     if (pop()) {
       mCount.setText(mFragments.size() + "");
     }
-  }
-
-  @Override protected void showFragment(Fragment fragment) {
-    getSupportFragmentManager().beginTransaction()
-        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-        .replace(R.id.fragment_layout, fragment)
-        .commit();
-    getSupportFragmentManager().executePendingTransactions();
   }
 
   private void initSpinner() {

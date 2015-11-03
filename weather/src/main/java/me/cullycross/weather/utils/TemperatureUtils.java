@@ -1,6 +1,4 @@
-package me.cullycross.kpimapstest;
-
-import android.support.v4.app.Fragment;
+package me.cullycross.weather.utils;
 
 /**
  * Created by: Anton Shkurenko (cullycross)
@@ -9,9 +7,13 @@ import android.support.v4.app.Fragment;
  * Code style: SquareAndroid (https://github.com/square/java-code-styles)
  * Follow me: @tonyshkurenko
  */
-public abstract class DynamicFragment extends Fragment {
+public class TemperatureUtils {
 
-  public abstract void onPush();
+  private TemperatureUtils() {
 
-  public abstract void onPop();
+  }
+
+  public static float ftoC(float f) {
+    return (f-32)*(5f/9f);
+  }
 }
